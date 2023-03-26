@@ -1,9 +1,12 @@
 package com.abit8.lesson12_s6
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.abit8.lesson12_s6.MainActivity.Companion.KEY_DATA
+import com.abit8.lesson12_s6.MainActivity.Companion.KEY_DATA2
 import com.abit8.lesson12_s6.databinding.ActivitySecondBinding
 
 class SecondActivity : AppCompatActivity() {
@@ -13,26 +16,24 @@ class SecondActivity : AppCompatActivity() {
         binding = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val data = intent.extras!!.getString("dataKey")
+        val data = intent?.getStringExtra(KEY_DATA)
         binding.etText2.setText(data)
 
         binding.btnNext2.setOnClickListener {
             if (binding.etText2.text.isNotEmpty()) {
-                val mainActivity = Intent(this@SecondActivity, MainActivity::class.java)
-                mainActivity.putExtra("dataKey2", binding.etText2.text.toString())
-                startActivity(mainActivity)
-            } else if (binding.etText2.text.isEmpty()) {
+                val resultIntent = Intent()
+                val data2 = binding.etText2.text.toString()
+                resultIntent.putExtra(KEY_DATA2, data2)
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
+            } else {
                 Toast.makeText(
                     this@SecondActivity,
-                    "Поле не должно быть пустой!",
+                    "Поле не должно быть пустым!",
                     Toast.LENGTH_SHORT
-                ).show()
+                )
+                    .show()
             }
         }
-
-
-        /* val etData = registerForActivityResult(MainActivity.MySecondActivityContract()) {
-
-         }*/
     }
 }
