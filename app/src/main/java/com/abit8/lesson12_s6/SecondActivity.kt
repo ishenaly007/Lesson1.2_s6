@@ -29,7 +29,7 @@ class SecondActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     this@SecondActivity,
-                    "Поле не должно быть пустым!",
+                    R.string.empty_text,
                     Toast.LENGTH_SHORT
                 )
                     .show()

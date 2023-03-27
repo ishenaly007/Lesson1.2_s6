@@ -25,9 +25,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-
-
-
         binding.btnNext.setOnClickListener {
             if (binding.etText.text.isNotEmpty()) {
                 val intent = Intent(this, SecondActivity::class.java)
@@ -35,11 +32,10 @@ class MainActivity : AppCompatActivity() {
                 resultLauncher.launch(intent)
                 binding.etText.text.clear()
             } else {
-                Toast.makeText(this@MainActivity, "Поле не должно быть пустым!", Toast.LENGTH_SHORT)
+                Toast.makeText(this@MainActivity, R.string.empty_text, Toast.LENGTH_SHORT)
                     .show()
             }
         }
-
     }
 
     companion object {
